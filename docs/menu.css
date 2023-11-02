@@ -1,0 +1,60 @@
+.menu {
+  display: flex;
+  overflow: hidden;
+  height: 69px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+}
+
+.menu a {
+  color: white;
+  font-size: 10pt;
+  text-decoration: none;
+}
+
+.menu .logo {
+  height: 30px;
+}
+
+.menu a:hover {}
+
+/* Add an active class to highlight the current page */
+.menu a.active {}
+
+/* Hide the link that should open and close the menu on small screens */
+.menu .icon {
+  display: none;
+}
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the menu (.icon) */
+/* @media screen and (max-width: 600px) {
+  .menu a:not(:first-child) {
+    display: none;
+  }
+
+  .menu a.icon {
+    float: right;
+    display: block;
+  }
+} */
+
+/* The "responsive" class is added to the menu with JavaScript when the user clicks on the icon. This class makes the menu look good on small screens (display the links vertically instead of horizontally) */
+/* @media screen and (max-width: 600px) {
+  .menu.responsive {
+    position: relative;
+  }
+
+  .menu.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .menu.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+} */

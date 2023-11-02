@@ -1,64 +1,49 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A layout example that shows off a responsive product landing page.">
-    <title>Landing Page &ndash; Layout Examples &ndash; Pure</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" href="/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bakbak+One">
+  <link rel="stylesheet" href="./normalize.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./menu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-  WE ARE WORKING ON AN EARLY WARNING SYSTEM FOR ALZHEIMER’S DISEASE THAT ENABLES COST EFFECTIVE, NON-INVASIVE SCREENING
-
-<div class="header">
-    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Cambridge Vision Technology</a>
-
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="index.html" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item"><a href="about.html" class="pure-menu-link">About us</a></li>
-            <li class="pure-menu-item"><a href="contact.html" class="pure-menu-link">Contact</a></li>
-        </ul>
+  <div class="header">
+    <div class="menu">
+      <a href="index.html" class="active">
+        <img src="./img/icon+colour.svg" class="logo" />
+      </a>
+      <a href="problem.html">Problem</a>
+      <a href="technology.html">Technology</a>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
     </div>
-</div>
-<div class="splash-container">
-  <video autoplay loop muted>
-    <source src="img/vr.mov" type="video/mp4" class=".pure-img"/>
-    Your browser does not support the video tag.
-  </video>
-  <div class="splash">
-      <h1 class="splash-head">Making early diagnosis a reality</h1>
-      <p class="splash-subhead">
-        We are working on an early warning system for Alzheimer’s disease that enables cost effective, non-invasive screening.
-      </p>
   </div>
-</div>
-<div class="content-wrapper">
-    <div class="content">
-        <h2 class="content-head is-center">Our mission.</h2>
-        <p>
-          CVT’s mission is to make the data driven, standardised diagnosis of chronic retinal and neurodegenerative
-           diseases available to all. Our first product is an early warning system for Alzheimer’s disease that enables cost effective, non-invasive population screening.
-          This consists of a highly-scalable, portable, retinal imager and machine intelligence system 
-          capable of measuring Alzheimer’s biomarkers. It has the potential to improve the lives of over 50 million 
-          people over the next 10 years and save the world over $220 billion in dementia care every year.
-        </p>
-    </div>
+  <div class="content">
+    <div class="item-full">
 
-    <div class="content">
-      <h2 class="content-head is-center">How we are doing it.</h2>
-      <p>
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur
-      </p>
+      <img style="position: absolute; pointer-events: none;" width="70%" src="./img/video-text-overlay.svg"
+        alt="Early detection of Alzhemier's" />
+      <video class="background" id="bgVideo" preload="true" autoplay loop muted>
+        <source src="./img/sample.mov" type="video/mp4" />
+      </video>
+    </div>
+    <div class="item bg-secondary-light">
+      <div class="statement">Welcome to Cambridge Vision Technology, it is our mission to make the timely and accurate
+        detection of Alzheimers
+        available to everyone.</div>
+    </div>
   </div>
-
-    <div class="footer l-box is-center">
-        Copyright CVT...
-    </div>
-
-</div>
-
+  <div class="footer">&copy; Copyright 2023, Cambridge Vision Technology</div>
 </body>
+
 </html>

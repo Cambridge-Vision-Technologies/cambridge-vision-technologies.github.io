@@ -1,2 +1,4 @@
-*.mov
-*.png
+.docker-npm-cache/
+.docker-node-modules/
+.parcel-cache/
+dist/
