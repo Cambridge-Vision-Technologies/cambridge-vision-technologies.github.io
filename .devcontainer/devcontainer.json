@@ -3,7 +3,7 @@
 {
   "name": "Ubuntu",
   "build": {
-    "dockerfile": "../Dockerfile",
+    "dockerfile": "./Dockerfile",
     // Update 'VARIANT' to pick a Node version: 18, 16, 14.
     // Append -bullseye or -buster to pin to an OS version.
     // Use -bullseye variants on local arm64/Apple Silicon.
@@ -13,7 +13,7 @@
     "/var/run/docker.sock:/var/run/docker.sock",
     "--volume",
     "${localWorkspaceFolder}/.docker-npm-cache/:/root/.npm",
-    ],
+  ],
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
