@@ -1,0 +1,9 @@
+#!/bin/sh
+make
+
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+branch_name_length=${#branch_name}
+
+if [[ $branch_name_length -gt 15 ]]; then
+    echo "Branch name cannot contain more than 15 characters." && exit 1
+fi
