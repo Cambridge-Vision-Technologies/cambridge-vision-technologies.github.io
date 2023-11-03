@@ -23,5 +23,14 @@ jobs:
       - name: moveenv
         run: |
           mv  ./cvt-website.env ~/cvt-website.env
+      - name: Cache NPM
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-npm
+        with:
+          path: .docker-npm-cache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
       - name: Run build
         run: make build
