@@ -1,18 +1,23 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/javascript-node
 {
-  "name": "Ubuntu",
+  "name": "cvt-website",
   "build": {
-    "dockerfile": "./Dockerfile"
+    "dockerfile": "../Dockerfile"
     // Update 'VARIANT' to pick a Node version: 18, 16, 14.
     // Append -bullseye or -buster to pin to an OS version.
     // Use -bullseye variants on local arm64/Apple Silicon.
   },
+  "postAttachCommand": "make dev-setup",
   "runArgs": [
+    "--env-file",
+    "${localEnv:HOME}${localEnv:USERPROFILE}/cvt-website.env",
     "--volume",
     "/var/run/docker.sock:/var/run/docker.sock",
     "--volume",
-    "${localWorkspaceFolder}/.docker-npm-cache/:/root/.npm"
+    "${localWorkspaceFolder}/.docker-npm-cache/:/root/.npm",
+    "--volume",
+    "${localWorkspaceFolder}/.docker-node-modules/:${containerWorkspaceFolder}/node_modules"
   ],
   // Configure tool-specific properties.
   "customizations": {

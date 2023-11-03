@@ -10,7 +10,7 @@ else
 	LABEL=${VERSION}
 endif
 
-PROJECT_NAME=website
+PROJECT_NAME=cvt-website
 CONTAINER_SOURCE_MOUNT=/workspaces/${PROJECT_NAME}
 BUILD_CONTAINER_NAME=cvt-website
 BUILDER_NAME=cvt-website-builder
@@ -27,37 +27,79 @@ endif
 .PHONY: all
 all: format build test
 
+.PHONY: build
+build: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make build-local"
+
+.PHONY: test
+test: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make test-local"
+
+.PHONY: format
+format: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make format-local"
+
+.PHONY: format-fix
+format-fix: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make format-fix-local"
+
+.PHONY: dev
+dev: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make dev-local"
+
+./out/.docker_hash: Dockerfile | setup-hooks out
+ifndef NON_CONTAINER_BUILD
+ifeq ("$(wildcard $(ENV_FILE))","")
+	$(error You need to create an env file at ${ENV_FILE}, see .env.template for required keys)
+endif
+	@if ! docker buildx ls | grep -q ${BUILD_CONTAINER_NAME}; then\
+		docker buildx create --name ${BUILD_CONTAINER_NAME} --use;\
+	fi
+	@echo "🐳 Building our docker build image..."
+	docker buildx build --load -t ${BUILD_CONTAINER_NAME} -f ${BUILD_CONTAINER_DOCKER_FILE} --build-arg CONTAINER_SOURCE_MOUNT=${CONTAINER_SOURCE_MOUNT} --cache-to type=gha,mode=max --cache-from type=gha .
+else
+	@echo "🐳 Building locally, skipping docker image creation"	
+endif
+	echo "BLANK" > ./out/.docker_hash
+
 ./node_modules/.make_marker: package-lock.json | out
 	@echo "💾 Installing npm dependencies"
 	${DOCKER_RUN_BUILD} npm ci --ignore-scripts
 	${DOCKER_RUN_BUILD} echo "BLANK" > ./node_modules/.make_marker
 
-.PHONY: format
-format: ./node_modules/.make_marker info-local
-	${DOCKER_RUN_BUILD} npx prettier . --check
 
-.PHONY: format-fix
+# LOCAL COMMANDS
+
+.PHONY: all-local
+all-local: format-local lint-local build-local test-local release-local
+
+.PHONY: format-local
+format-local: ./node_modules/.make_marker info-local
+	npx prettier . --check
+
+.PHONY: format-fix-local
 format-fix: ./node_modules/.make_marker
-	${DOCKER_RUN_BUILD} npx prettier . --write
+	npx prettier . --write
 
-.PHONY: build
-build: ./node_modules/.make_marker info-local
+.PHONY: build-local
+build-local: ./node_modules/.make_marker info-local
 	@echo "🛠 Building..."
 	rm -rf dist
-	${DOCKER_RUN_BUILD} npx parcel build docs/index.html
+	npx parcel build docs/index.html
 
-.PHONY: test 
-test: ./node_modules/.make_marker info-local
+.PHONY: test-local
+test-local: ./node_modules/.make_marker info-local
 
-.PHONY: dev
-dev: ./node_modules/.make_marker
+.PHONY: dev-local
+dev-local: ./node_modules/.make_marker
 	@echo "📟 Running dev server..."
-	${DOCKER_RUN_BUILD} npx parcel docs/index.html
+	npx parcel docs/index.html
 
 .PHONY: clean
 clean:
 	@echo "🧹 Cleaning..."
 	rm -rf node_modules
+	rm -rf out
 	rm -rf dist
 	rm -rf .docker-node-modules
 	rm -rf .docker-nom-cache
@@ -73,12 +115,9 @@ endif
 commit-msg:
 	npx --no-install commitlint --edit ${COMMIT_FILE}
 
-.PHONY: prepare-commit-msg
-prepare-commit-msg:
-	make prepare-commit-msg-local
 
-.PHONY: prepare-commit-msg-local
-prepare-commit-msg-local: ./node_modules/.make_marker
+.PHONY: prepare-commit-msg
+prepare-commit-msg: ./node_modules/.make_marker
 ifndef GIT_NAME
 	$(error GIT_NAME is not set)
 endif
@@ -97,3 +136,14 @@ info-local: | setup-hooks
 
 out:
 	mkdir out
+
+.PHONY: dev-setup
+dev-setup:
+ifndef GIT_NAME
+	$(error GIT_NAME is not set)
+endif
+ifndef GIT_EMAIL
+	$(error GIT_EMAIL is not set)
+endif
+	git config --global user.name "${GIT_NAME}"
+	git config --global user.email "${GIT_EMAIL}"
