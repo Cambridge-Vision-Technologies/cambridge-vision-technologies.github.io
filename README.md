@@ -42,7 +42,7 @@ The website is deployed to github pages, for static sites. This is done with the
 
 Currently the content is static. But eventually will be contained in markdown files in `src` here.
 
-- [index](content/index)
-- [problem](content/problem)
-- [technology](content/technology)
-- [about](content/about)
+- [index](content/index.md)
+- [problem](content/problem.md)
+- [technology](content/technology.md)
+- [about](content/about.md)
