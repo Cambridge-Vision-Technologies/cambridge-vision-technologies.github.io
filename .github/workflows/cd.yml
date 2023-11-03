@@ -33,7 +33,19 @@ jobs:
         uses: actions/checkout@v3
         with:
           lfs: true
-      - run: make build
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_CI: true
+          file_name: cvt-website.env
+      - name: moveenv
+        run: |
+          mv  ./cvt-website.env ~/cvt-website.env
+      - name: Run build
+        run: make build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

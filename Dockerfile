@@ -20,7 +20,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
 RUN sudo apt-get install git-lfs -y
 RUN git lfs install
 # Requirments for cypress
-RUN sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y --fix-missing
+RUN sudo apt --fix-missing update && sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
 ARG CONTAINER_SOURCE_MOUNT
 WORKDIR ${CONTAINER_SOURCE_MOUNT}
 # RUN git config --global --add safe.directory /workspaces/ppaya-slider-js

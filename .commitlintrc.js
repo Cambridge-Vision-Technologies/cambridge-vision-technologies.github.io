@@ -1,1 +1,1 @@
-module.exports = { extends: ['eslint'] }
+module.exports = { extends: ["eslint"] };

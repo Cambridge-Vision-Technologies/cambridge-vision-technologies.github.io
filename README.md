@@ -1,7 +1,16 @@
 # Our company website
+
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+## Aims
+
+- responsive
+- accessible
+- simple
+
 ## Prerequisites
+
+- You need to first create a `~/cvt-website.env` file in your home directory. This should contain all teh environment variables that are needed to build and deploy the system. A sample env file is included at `./sample.env`
 
 You should be able to develop and run this project directly in GitHub Codespaces or.
 
@@ -17,9 +26,13 @@ You should be able to develop and run this project directly in GitHub Codespaces
 
 To run locally `make dev`
 
+## Build
+
+All commands are through make. See the Makefile for details but some basic ones are `make build` and `make format`. If you run these commands on your native machine the makefiel will attempt to run them inside a docker container with all the dependencies needed. You can force them to run on your native machine by appending -local to the command e.g. `make build-local`.
+
 ## Technology
 
-Teh site is currently just static html pages. We will probably move to Jekyll when we need to update it regularly.
+The site is currently just static html pages. We will probably move to Jekyll when we need to update it regularly. Packaging of the html and css is done with parceljs. This also runs a dev server with hot reloading for fast development.
 
 ## Deployment
 
