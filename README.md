@@ -10,7 +10,7 @@
 
 ## Prerequisites
 
-- You need to first create a `~/cvt-website.env` file in your home directory. This should contain all teh environment variables that are needed to build and deploy the system. A sample env file is included at `./sample.env`
+- You need to first create a `~/cvt-website.env` file in your home directory. This should contain all teh environment variables that are needed to build and deploy the system. A sample env file is included at [./sample.env](sample.env)
 
 You should be able to develop and run this project directly in GitHub Codespaces or.
 
@@ -28,7 +28,7 @@ To run locally `make dev`
 
 ## Build
 
-All commands are through make. See the Makefile for details but some basic ones are `make build` and `make format`. If you run these commands on your native machine the makefiel will attempt to run them inside a docker container with all the dependencies needed. You can force them to run on your native machine by appending -local to the command e.g. `make build-local`.
+All commands are through make. See the [Makefile](Makefile) for details but some basic ones are `make build` and `make format`. If you run these commands on your native machine the makefiel will attempt to run them inside a docker container with all the dependencies needed. You can force them to run on your native machine by appending -local to the command e.g. `make build-local`.
 
 ## Technology
 
@@ -36,11 +36,11 @@ The site is currently just static html pages. We will probably move to Jekyll wh
 
 ## Deployment
 
-The website is deployed to github pages, for static sites. This is done with the cd process described in `./.github/workflows/cd.yml`
+The website is deployed to github pages, for static sites. This is done with the cd process described in [.github/workflows/cd.yml](.github/workflows/cd.yml)
 
 ## Content
 
-Currently the content is static. But eventually will be contained in markdown files in `src` here.
+Currently the content is static. But eventually will be contained in markdown files in `./content` here.
 
 - [index](content/index.md)
 - [problem](content/problem.md)
