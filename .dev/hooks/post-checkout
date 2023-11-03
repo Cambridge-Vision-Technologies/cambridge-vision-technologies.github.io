@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# old_head=$1
+new_head=$2
+checkout_type=$3
+
+[[ $checkout_type == 1 ]] && checkout_type='branch' ||
+                            checkout_type='file' ;
+
+if [[ $checkout_type = "branch" ]]; then
+    branch_name=$(git name-rev --name-only ${new_head})
+    branch_name_length=${#branch_name}
+    if [[ $branch_name_length -gt 15 ]]; then
+        echo "Warning: Branch name (${branch_name}) contains more than 15 characters." && exit 1
+    fi
+fi
