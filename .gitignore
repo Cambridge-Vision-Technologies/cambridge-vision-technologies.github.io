@@ -2,3 +2,4 @@
 .docker-node-modules/
 .parcel-cache/
 dist/
+node_modules/

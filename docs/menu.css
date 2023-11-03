@@ -18,10 +18,12 @@
   height: 30px;
 }
 
-.menu a:hover {}
+.menu a:hover {
+}
 
 /* Add an active class to highlight the current page */
-.menu a.active {}
+.menu a.active {
+}
 
 /* Hide the link that should open and close the menu on small screens */
 .menu .icon {
