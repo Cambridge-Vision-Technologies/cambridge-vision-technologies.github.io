@@ -1,0 +1,23 @@
+name: Continuous Integration
+
+on: [push]
+
+permissions:
+  contents: read # for checkout
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run build
+        run: make build
+  release:
+    permissions: write-all
+    needs: [build, test, format, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run release
+        run: make release

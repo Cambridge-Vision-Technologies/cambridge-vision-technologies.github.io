@@ -1,0 +1,12 @@
+{
+  "name": "@cambridge-vision-technologies/website",
+  "version": "0.0.0-development",
+  "description": "CVT website",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.10.2",
+    "prettier": "3.0.3"
+  }
+}

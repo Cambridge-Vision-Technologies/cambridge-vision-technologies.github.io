@@ -1,7 +1,7 @@
 :root {
-  --secondary-light: #FCE0EF;
-  --primary-light: #A4DDF8;
-  --primary-extra-dark: #0A0A23;
+  --secondary-light: #fce0ef;
+  --primary-light: #a4ddf8;
+  --primary-extra-dark: #0a0a23;
   --neutral-extra-dark: black;
   --neutral-extra-light: white;
 }
@@ -18,8 +18,8 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.header {}
-
+.header {
+}
 
 .content {
   display: flex;
@@ -63,8 +63,6 @@ body {
   font-size: 2vw;
 }
 
-
-
 @media (max-width: 600px) {
   .content .item {
     flex: 100vw;
@@ -82,14 +80,11 @@ body {
   object-fit: cover;
 }
 
-
-
 .content .item .statement {
   font-size: 4vw;
   text-align: center;
   margin: 20px;
 }
-
 
 /* .content .item .background {
   width: 100%;
