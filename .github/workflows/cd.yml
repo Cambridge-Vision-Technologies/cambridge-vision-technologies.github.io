@@ -48,6 +48,7 @@ jobs:
         run: make build
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
