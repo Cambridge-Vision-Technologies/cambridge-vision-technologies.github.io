@@ -3,6 +3,7 @@ module.exports = {
     "main",
     { name: "staging", prerelease: true },
     { name: "debugci", prerelease: true },
+    { name: "8", prerelease: true },
   ],
   plugins: [
     [

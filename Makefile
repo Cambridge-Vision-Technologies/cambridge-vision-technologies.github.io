@@ -6,6 +6,7 @@ GIT_REPOSITORY:=${GIT_REPOSITORY}
 GITHUB_TOKEN:=${GITHUB_TOKEN}
 GIT_NAME:=${GIT_NAME}
 GIT_EMAIL:=${GIT_EMAIL}
+CI:=${CI}
 
 ifndef VERSION
 	LABEL=${GIT_COMMIT}
@@ -196,5 +197,8 @@ endif
 ifndef GITHUB_REPOSITORY
 	$(error creating .env file: GITHUB_REPOSITORY is not set, did you make a local .env file?)
 endif
-	printf "NPM_TOKEN=${GITHUB_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GITHUB_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}" > $(ENV_FILE)
+ifndef CI
+	$(error creating .env file: CI is not set, did you make a local .env file?)
+endif
+	printf "NPM_TOKEN=${GITHUB_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GITHUB_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}\nCI=${CI}" > $(ENV_FILE)
 endif
