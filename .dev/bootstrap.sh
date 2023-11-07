@@ -18,6 +18,7 @@ permissions() {
   chmod +x ./.dev/hooks/commit-msg
   chmod +x ./.dev/hooks/post-checkout
   chmod +x ./.dev/hooks/prepare-commit-msg
+  chmod +x ./.dev/hooks/pre-push
 }
 
 log 're/configuring hooks...'

@@ -4,6 +4,8 @@ on: [push]
 
 permissions:
   contents: read # for checkout
+  packages: read # for installing cvt packages
+
 jobs:
   build:
     runs-on: ubuntu-latest
