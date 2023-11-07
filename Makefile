@@ -2,9 +2,10 @@
 SHELL := /bin/bash
 GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT:=$(shell git rev-parse --short HEAD)
-GIT_NAME:=${GIT_NAME}
 GIT_REPOSITORY:=${GIT_REPOSITORY}
 GITHUB_TOKEN:=${GITHUB_TOKEN}
+GIT_NAME:=${GIT_NAME}
+GIT_EMAIL:=${GIT_EMAIL}
 
 ifndef VERSION
 	LABEL=${GIT_COMMIT}
@@ -167,7 +168,6 @@ ifndef GIT_COMMIT
 	$(error GIT_COMMIT is not set)
 endif
 	gh auth setup-git && npx semantic-release
-	npm pack -pack-destination=out
 	echo "BLANK" > ./out/.release_marker
 
 .PHONY: version
