@@ -34,9 +34,38 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-
       - name: Run build
         run: make build
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_CI: true
+          file_name: cvt-website.env
+      - name: moveenv
+        run: |
+          mv  ./cvt-website.env ~/cvt-website.env
+      - name: Cache NPM
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-npm
+        with:
+          path: .docker-npm-cache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+      - name: Run format
+        run: make format
   release:
     permissions: write-all
-    needs: [build, test, format, lint]
+    needs: [build, format]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
