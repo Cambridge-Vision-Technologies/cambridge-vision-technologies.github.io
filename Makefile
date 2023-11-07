@@ -53,9 +53,7 @@ release: ./out/.docker_hash
 
 ./out/.docker_hash: Dockerfile | setup-hooks out
 ifndef NON_CONTAINER_BUILD
-ifeq ("$(wildcard $(ENV_FILE))","")
-	$(error You need to create an env file at ${ENV_FILE}, see .env.template for required keys)
-endif
+	sh -c "make env"
 	@if ! docker buildx ls | grep -q ${BUILD_CONTAINER_NAME}; then\
 		docker buildx create --name ${BUILD_CONTAINER_NAME} --use;\
 	fi
@@ -181,3 +179,27 @@ endif
 	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/about.html
 	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/technology.html
 	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/problem.html
+
+.PHONY: env
+env:
+ifeq ("$(wildcard $(ENV_FILE))","")
+ifndef NPM_TOKEN
+	$(error creating .env file: NPM_TOKEN is not set, did you make a local .env file?)
+endif
+ifndef GITHUB_TOKEN
+	$(error creating .env file: GITHUB_TOKEN is not set, did you make a local .env file?)
+endif
+ifndef GH_TOKEN
+	$(error creating .env file: GH_TOKEN is not set, did you make a local .env file?)
+endif
+ifndef GIT_NAME
+	$(error creating .env file: GIT_NAME is not set, did you make a local .env file?)
+endif
+ifndef GIT_EMAIL
+	$(error creating .env file: GIT_EMAIL is not set, did you make a local .env file?)
+endif
+ifndef GITHUB_REPOSITORY
+	$(error creating .env file: GITHUB_REPOSITORY is not set, did you make a local .env file?)
+endif
+	printf "NPM_TOKEN=${NPM_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GH_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}" > $(ENV_FILE)
+endif
