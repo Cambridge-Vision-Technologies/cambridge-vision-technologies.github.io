@@ -9,9 +9,10 @@
     // Use -bullseye variants on local arm64/Apple Silicon.
   },
   "postAttachCommand": "make dev-setup",
+  "initializeCommand": "make env GIT_REPOSITORY=${localWorkspaceFolderBasename}",
   "runArgs": [
     "--env-file",
-    "${localEnv:HOME}${localEnv:USERPROFILE}/cvt-website.env",
+    "${localEnv:HOME}${localEnv:USERPROFILE}/${localWorkspaceFolderBasename}.env",
     "--volume",
     "/var/run/docker.sock:/var/run/docker.sock",
     "--volume",
