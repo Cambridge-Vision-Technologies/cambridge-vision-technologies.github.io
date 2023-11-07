@@ -4,6 +4,7 @@ GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT:=$(shell git rev-parse --short HEAD)
 GIT_NAME:=${GIT_NAME}
 GIT_REPOSITORY:=${GIT_REPOSITORY}
+GITHUB_TOKEN:=${GITHUB_TOKEN}
 
 ifndef VERSION
 	LABEL=${GIT_COMMIT}
