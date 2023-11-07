@@ -183,14 +183,8 @@ endif
 .PHONY: env
 env:
 ifeq ("$(wildcard $(ENV_FILE))","")
-ifndef NPM_TOKEN
-	$(error creating .env file: NPM_TOKEN is not set, did you make a local .env file?)
-endif
 ifndef GITHUB_TOKEN
 	$(error creating .env file: GITHUB_TOKEN is not set, did you make a local .env file?)
-endif
-ifndef GH_TOKEN
-	$(error creating .env file: GH_TOKEN is not set, did you make a local .env file?)
 endif
 ifndef GIT_NAME
 	$(error creating .env file: GIT_NAME is not set, did you make a local .env file?)
@@ -201,5 +195,5 @@ endif
 ifndef GITHUB_REPOSITORY
 	$(error creating .env file: GITHUB_REPOSITORY is not set, did you make a local .env file?)
 endif
-	printf "NPM_TOKEN=${NPM_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GH_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}" > $(ENV_FILE)
+	printf "NPM_TOKEN=${GITHUB_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GITHUB_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}" > $(ENV_FILE)
 endif
