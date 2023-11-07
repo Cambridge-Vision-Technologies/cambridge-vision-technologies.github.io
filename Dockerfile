@@ -23,6 +23,6 @@ RUN git lfs install
 RUN sudo apt --fix-missing update && sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb -y
 ARG CONTAINER_SOURCE_MOUNT
 WORKDIR ${CONTAINER_SOURCE_MOUNT}
-# RUN git config --global --add safe.directory /workspaces/ppaya-slider-js
+RUN git config --global --add safe.directory /workspaces/source
 RUN ln -sf /bin/bash /bin/sh
 CMD [ ]

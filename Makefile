@@ -3,6 +3,7 @@ SHELL := /bin/bash
 GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT:=$(shell git rev-parse --short HEAD)
 GIT_NAME:=${GIT_NAME}
+GIT_REPOSITORY:=${GIT_REPOSITORY}
 
 ifndef VERSION
 	LABEL=${GIT_COMMIT}
@@ -10,14 +11,12 @@ else
 	LABEL=${VERSION}
 endif
 
-
-PROJECT_NAME=cvt-website
-CONTAINER_SOURCE_MOUNT=/workspaces/${PROJECT_NAME}
-BUILD_CONTAINER_NAME=cvt-website
-BUILDER_NAME=cvt-website-builder
+CONTAINER_SOURCE_MOUNT=/workspaces/source
+BUILD_CONTAINER_NAME=${GIT_REPOSITORY}
+BUILDER_NAME=${GIT_REPOSITORY}-builder
 BUILD_CONTAINER_DOCKER_FILE=Dockerfile
 PWD = $(shell /bin/pwd -P)
-ENV_FILE=~/${PROJECT_NAME}.env
+ENV_FILE=~/${GIT_REPOSITORY}.env
 
 ifndef NON_CONTAINER_BUILD
 # Check for env file
@@ -158,6 +157,7 @@ ifndef GIT_EMAIL
 endif
 	git config --global user.name "${GIT_NAME}"
 	git config --global user.email "${GIT_EMAIL}"
+	git config --global --add safe.directory ${CONTAINER_SOURCE_MOUNT}
 
 out/.release_marker: dist release.config.js package-lock.json README.md | out
 	@echo "💸 Releasing..."
