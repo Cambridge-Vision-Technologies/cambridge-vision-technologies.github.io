@@ -28,6 +28,7 @@ jobs:
         run: make build
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
@@ -49,10 +50,12 @@ jobs:
         run: make format
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run test
         run: make test
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release:
     permissions: write-all
     needs: [build, test]
@@ -76,3 +79,4 @@ jobs:
         run: make release
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
