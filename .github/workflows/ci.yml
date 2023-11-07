@@ -20,6 +20,7 @@ jobs:
           envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GIT_REPOSITORY: ${{ github.event.repository.name }}
           envkey_CI: true
           file_name: cvt-website.env
       - name: moveenv
@@ -49,6 +50,7 @@ jobs:
           envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GIT_REPOSITORY: ${{ github.event.repository.name }}
           envkey_CI: true
           file_name: cvt-website.env
       - name: moveenv
@@ -80,6 +82,7 @@ jobs:
           envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GIT_REPOSITORY: ${{ github.event.repository.name }}
           envkey_CI: true
           file_name: cvt-website.env
       - name: moveenv

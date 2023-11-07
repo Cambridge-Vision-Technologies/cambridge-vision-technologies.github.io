@@ -14,6 +14,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -39,6 +40,7 @@ jobs:
           envkey_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           envkey_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          envkey_GIT_REPOSITORY: ${{ github.event.repository.name }}
           envkey_CI: true
           file_name: cvt-website.env
       - name: moveenv
