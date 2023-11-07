@@ -10,6 +10,7 @@ else
 	LABEL=${VERSION}
 endif
 
+
 PROJECT_NAME=cvt-website
 CONTAINER_SOURCE_MOUNT=/workspaces/${PROJECT_NAME}
 BUILD_CONTAINER_NAME=cvt-website
@@ -25,7 +26,7 @@ ifndef NON_CONTAINER_BUILD
 endif
 
 .PHONY: all
-all: format build test
+all: format test build release
 
 .PHONY: build
 build: ./out/.docker_hash
@@ -47,6 +48,10 @@ format-fix: ./out/.docker_hash
 dev: ./out/.docker_hash
 	${DOCKER_RUN_BUILD} sh -c "make dev-local"
 
+.PHONY: release
+release: ./out/.docker_hash
+	${DOCKER_RUN_BUILD} sh -c "make release-local"
+
 ./out/.docker_hash: Dockerfile | setup-hooks out
 ifndef NON_CONTAINER_BUILD
 ifeq ("$(wildcard $(ENV_FILE))","")
@@ -64,8 +69,8 @@ endif
 
 ./node_modules/.make_marker: package-lock.json | out
 	@echo "💾 Installing npm dependencies"
-	${DOCKER_RUN_BUILD} npm ci --ignore-scripts
-	${DOCKER_RUN_BUILD} echo "BLANK" > ./node_modules/.make_marker
+	npm ci --ignore-scripts
+	echo "BLANK" > ./node_modules/.make_marker
 
 
 # LOCAL COMMANDS
@@ -78,11 +83,14 @@ format-local: ./node_modules/.make_marker info-local
 	npx prettier . --check
 
 .PHONY: format-fix-local
-format-fix: ./node_modules/.make_marker
+format-fix-local: ./node_modules/.make_marker info-local
 	npx prettier . --write
 
 .PHONY: build-local
-build-local: ./node_modules/.make_marker info-local
+build-local: dist info-local
+
+.PHONY: dist
+dist: ./node_modules/.make_marker info-local
 	@echo "🛠 Building..."
 	rm -rf dist
 	npx parcel build docs/index.html
@@ -91,9 +99,12 @@ build-local: ./node_modules/.make_marker info-local
 test-local: ./node_modules/.make_marker info-local
 
 .PHONY: dev-local
-dev-local: ./node_modules/.make_marker
+dev-local: ./node_modules/.make_marker info-local
 	@echo "📟 Running dev server..."
 	npx parcel docs/index.html
+
+.PHONY: release-local 
+release-local: ./out/.release_marker info-local
 
 .PHONY: clean
 clean:
@@ -112,9 +123,9 @@ ifneq ($(CI), true)
 	sh .dev/bootstrap.sh
 endif
 
+.PHONY: commit-msg
 commit-msg:
 	npx --no-install commitlint --edit ${COMMIT_FILE}
-
 
 .PHONY: prepare-commit-msg
 prepare-commit-msg: ./node_modules/.make_marker
@@ -147,3 +158,26 @@ ifndef GIT_EMAIL
 endif
 	git config --global user.name "${GIT_NAME}"
 	git config --global user.email "${GIT_EMAIL}"
+
+out/.release_marker: dist release.config.js package-lock.json README.md | out
+	@echo "💸 Releasing..."
+ifndef GITHUB_TOKEN
+	$(error GITHUB_TOKEN is not set)
+endif
+ifndef GIT_COMMIT
+	$(error GIT_COMMIT is not set)
+endif
+	gh auth setup-git && npx semantic-release
+	npm pack -pack-destination=out
+	echo "BLANK" > ./out/.release_marker
+
+.PHONY: version
+version:
+ifndef LABEL
+	$(error LABEL is not set)
+endif
+	echo "VERSION: ${LABEL}"
+	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/index.html
+	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/about.html
+	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/technology.html
+	sed -i 's/0.0.0-development/${LABEL}/g' ./dist/problem.html
