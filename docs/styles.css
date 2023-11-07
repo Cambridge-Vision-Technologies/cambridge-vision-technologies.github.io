@@ -117,3 +117,11 @@ body {
 .bg-primary-light {
   background-color: var(--primary-light);
 }
+
+#Version {
+  padding: 5px;
+}
+
+#Copyright {
+  padding: 5px;
+}
