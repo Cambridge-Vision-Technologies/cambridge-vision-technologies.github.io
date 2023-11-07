@@ -28,7 +28,6 @@ jobs:
         run: make build
         env:
           GIT_REPOSITORY: ${{ github.event.repository.name }}
-          GIT_TOKEN: ${{ env.GIT_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
