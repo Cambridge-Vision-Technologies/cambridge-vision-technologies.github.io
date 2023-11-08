@@ -93,7 +93,7 @@ build-local: dist info-local
 dist: ./node_modules/.make_marker info-local
 	@echo "🛠 Building..."
 	rm -rf dist
-	npx parcel build docs/index.html
+	npm run build
 
 .PHONY: test-local
 test-local: ./node_modules/.make_marker info-local
@@ -101,7 +101,7 @@ test-local: ./node_modules/.make_marker info-local
 .PHONY: dev-local
 dev-local: ./node_modules/.make_marker info-local
 	@echo "📟 Running dev server..."
-	npx parcel docs/index.html
+	npm run dev
 
 .PHONY: release-local 
 release-local: ./out/.release_marker info-local

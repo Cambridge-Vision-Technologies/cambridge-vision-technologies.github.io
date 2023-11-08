@@ -7,3 +7,4 @@ node_modules/
 !sample.env
 out/
 .DS_Store
+docs/*.html
