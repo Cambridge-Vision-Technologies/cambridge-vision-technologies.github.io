@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <title>Homepage</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Bakbak+One"
-    />
     <link rel="stylesheet" href="./normalize.css" />
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./menu.css" />
@@ -41,15 +33,16 @@
       </div>
     </div>
     <div class="content">
+      <div
+      style="position: absolute; pointer-events: none; width: 100vw; height: 50vw;  background-color: rgb(0, 0, 0, 0.5);"
+    ></div>
       <div class="item-full">
         <img
-          style="position: absolute; pointer-events: none"
-          width="70%"
-          src="./img/video-text-overlay.svg"
-          alt="Early detection of Alzhemier's"
-        />
+        style="position: absolute; pointer-events: none; width: 80vw; height: 30vw; object-fit: contain;"
+        src="./img/video-text-overlay.svg"
+        alt="Early detection of Alzhemier's"
+      />
         <video
-          class="background"
           id="bgVideo"
           preload="true"
           autoplay
@@ -62,8 +55,7 @@
       </div>
       <div class="item bg-secondary-light">
         <div class="statement">
-          Welcome to Cambridge Vision Technology, it is our mission to make the
-          timely and accurate detection of Alzheimers available to everyone.
+         {{welcome}}
         </div>
       </div>
     </div>

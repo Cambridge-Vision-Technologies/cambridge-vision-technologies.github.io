@@ -40,9 +40,24 @@ The website is deployed to github pages, for static sites. This is done with the
 
 ## Content
 
-Currently the content is static. But eventually will be contained in markdown files in `./content` here.
+Content is contained in markdown files in `./content` here.
 
-- [index](content/index.md)
-- [problem](content/problem.md)
-- [technology](content/technology.md)
-- [about](content/about.md)
+### Home
+
+- [Welcome](content/welcome.md)
+
+### Poblem
+
+- [Alzheimers](content/alzheimers.md)
+- [Challenge](content/challenge.md)
+
+### Technology
+
+- [Hardware](content/hardware.md)
+- [AI](content/ai.md)
+- [Platform](content/platform.md)
+
+### About
+
+- [About Us](content/us.md)
+- [Contact](content/contact.md)
