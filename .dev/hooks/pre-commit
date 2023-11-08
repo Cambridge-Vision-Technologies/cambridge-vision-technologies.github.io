@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 make
 
 branch_name=$(git rev-parse --abbrev-ref HEAD)
