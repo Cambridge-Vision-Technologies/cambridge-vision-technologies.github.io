@@ -41,8 +41,6 @@ const htmlTemplatesArray = htmlFiles.map((filename) => {
 });
 const htmlTemplates = squash(htmlTemplatesArray);
 const generated = mapO(htmlTemplates)((template) => template(vars));
-console.log(generated);
-
 Object.keys(generated).forEach((filename) => {
   fs.writeFileSync(`./docs/${filename}`, generated[filename]);
 });
