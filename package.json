@@ -22,11 +22,13 @@
     "commitlint-config-eslint": "^1.0.0",
     "conventional-changelog-eslint": "^5.0.0",
     "cz-adapter-eslint": "^0.3.0",
+    "nodemon": "^3.0.1",
     "parcel": "^2.10.2",
     "prettier": "3.0.3",
-    "showdown": "^2.1.0",
-    "nodemon": "^3.0.1",
-    "replace-in-file": "^7.0.2"
+    "replace-in-file": "^7.0.2",
+    "showdown": "^2.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
 }

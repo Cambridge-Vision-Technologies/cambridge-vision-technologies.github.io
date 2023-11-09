@@ -1,22 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <title>Homepage</title>
-    <link rel="stylesheet" href="./normalize.css" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./menu.css" />
-    <link
-      rel="stylesheet"
-      href="../node_modules/@cambridge-vision-technology/brand/output/_variables.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
+  {{{head}}}
 
   <body>
     <div class="header">
@@ -59,13 +43,9 @@
         </video>
       </div>
       <div class="item bg-secondary-light">
-        <div class="statement">{{welcome}}</div>
+        <div class="statement">{{{welcome}}}</div>
       </div>
     </div>
-    <div class="footer">
-      <span id="Copyright"
-        >&copy; Copyright 2023, Cambridge Vision Technology</span
-      ><span id="Version">Version: 0.0.0-development</span>
-    </div>
+    {{{footer}}}
   </body>
 </html>

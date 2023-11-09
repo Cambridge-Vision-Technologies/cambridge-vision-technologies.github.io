@@ -1,41 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <title>Homepage</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Bakbak+One"
-    />
-    <link rel="stylesheet" href="./normalize.css" />
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./menu.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-
+  {{{head}}}
   <body>
     <div class="header">
       <div class="menu">
-        <a href="index.html" class="active">
+        <a href="index.html">
           <img src="./img/icon+colour.svg" class="logo" />
         </a>
         <a href="problem.html">Problem</a>
-        <a href="technology.html">Technology</a>
+        <a href="technology.html" class="active">Technology</a>
         <a href="about.html">About</a>
       </div>
     </div>
     <div class="content">
       <div class="item bg-secondary-light">
-        <span> {{hardware}} </span>
+        <span> {{{hardware}}} </span>
       </div>
       <div class="item bg-secondary-light">
         <img id="hardware-image" src="./img/KristinaDevice2.png" />
@@ -47,22 +26,18 @@
         <img style="object-fit: contain" src="./img/ai.png" />
       </div>
       <div class="item bg-secondary-light">
-        <span> {{ai}} </span>
+        <span> {{{ai}}} </span>
       </div>
       <div class="item-full bg-primary-light">
         <img src="./img/platform2.jpeg" />
       </div>
       <div class="item bg-primary-light">
-        <span> {{platform}} </span>
+        <span> {{{platform}}} </span>
       </div>
       <div class="item bg-primary-light">
-        <img src="./img/devices.png" />
+        <img style="height: 60%" alt="secure" src="./img/secure.png" />
       </div>
     </div>
-    <div class="footer">
-      <span id="Copyright"
-        >&copy; Copyright 2023, Cambridge Vision Technology</span
-      ><span id="Version">Version: 0.0.0-development</span>
-    </div>
+    {{{footer}}}
   </body>
 </html>

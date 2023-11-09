@@ -32,7 +32,7 @@ All commands are through make. See the [Makefile](Makefile) for details but some
 
 ## Technology
 
-The site is currently just static html pages. We will probably move to Jekyll when we need to update it regularly. Packaging of the html and css is done with parceljs. This also runs a dev server with hot reloading for fast development.
+The site uses a simple fing-and-replace script to render the content markdown files and insert them into the html source files. Packaging of the generated html and css is done with parceljs. This also runs a dev server with hot reloading for fast development.
 
 ## Deployment
 
