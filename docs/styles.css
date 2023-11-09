@@ -22,6 +22,19 @@ body {
   color: var(--neutral-extra-light);
 }
 
+.content a:link {
+  color: var(--primary-extra-dark);
+}
+.content a:visited {
+  color: var(--primary-extra-dark);
+}
+.content a:hover {
+  color: var(--primary-extra-dark);
+}
+.content a:active {
+  color: var(--primary-extra-dark);
+}
+
 .footer {
   display: flex;
   height: 80px;

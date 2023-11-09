@@ -1,28 +1,48 @@
 const showdown = require("showdown");
 const replace = require("replace-in-file");
 const fs = require("fs");
+const Handlebars = require("handlebars");
+const { squash, mapO } = require("./utils");
 
 const converter = new showdown.Converter();
 
 const contentFiles = fs.readdirSync("./content");
 const htmlFiles = fs.readdirSync("./html");
-const copied = htmlFiles.map((fileName) => {
-  fs.copyFileSync(`./html/${fileName}`, `./docs/${fileName}`);
-});
-const replacements = contentFiles.map((file) => {
-  return file.split(".")[0];
-});
-const markdown = replacements.map((name) =>
-  fs.readFileSync(`./content/${name}.md`, "utf8"),
-);
-const html = markdown.map((md) => {
-  return converter.makeHtml(md);
-});
-const options = {
-  files: "./docs/*.html",
-  from: replacements.map((name) => `{{${name}}}`),
-  to: html,
-};
-const results = replace.sync(options);
 
-console.log(results);
+const replacements = contentFiles.map((file) => {
+  const spl = file.split(".");
+  return {
+    ext: spl[1],
+    fileName: spl[0],
+  };
+});
+
+const fileContents = replacements.map(({ fileName, ext }) => {
+  return {
+    fileName,
+    ext,
+    content: fs.readFileSync(`./content/${fileName}.${ext}`, "utf8"),
+  };
+});
+
+const htmlContents = fileContents.map(({ fileName, ext, content }) => {
+  return {
+    [fileName]: ext === "md" ? converter.makeHtml(content) : content,
+  };
+});
+
+const vars = squash(htmlContents);
+const htmlTemplatesArray = htmlFiles.map((filename) => {
+  return {
+    [filename]: Handlebars.compile(
+      fs.readFileSync(`./html/${filename}`, "utf8"),
+    ),
+  };
+});
+const htmlTemplates = squash(htmlTemplatesArray);
+const generated = mapO(htmlTemplates)((template) => template(vars));
+console.log(generated);
+
+Object.keys(generated).forEach((filename) => {
+  fs.writeFileSync(`./docs/${filename}`, generated[filename]);
+});
