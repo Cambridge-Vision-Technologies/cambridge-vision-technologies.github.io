@@ -1,0 +1,1 @@
+FROM ghcr.io/cambridge-vision-technology/base:latest
