@@ -15,9 +15,9 @@ else
 endif
 
 CONTAINER_SOURCE_MOUNT=/workspaces/source
-BUILD_CONTAINER_NAME=${GIT_REPOSITORY}
-BUILDER_NAME=${GIT_REPOSITORY}-builder
-BUILD_CONTAINER_DOCKER_FILE=Dockerfile
+BUILD_CONTAINER_NAME=website
+BUILDER_NAME=builder
+BUILD_CONTAINER_DOCKER_FILE=.devcontainer/Dockerfile
 PWD = $(shell /bin/pwd -P)
 ENV_FILE=~/${GIT_REPOSITORY}.env
 
@@ -26,6 +26,13 @@ ifndef NON_CONTAINER_BUILD
 	DOCKER_RUN_BUILD=docker run -i --rm --volume "${PWD}/:$(CONTAINER_SOURCE_MOUNT)/" --volume /var/run/docker.sock:/var/run/docker.sock --volume "${PWD}/.docker-npm-cache/:/root/.npm" --volume "${PWD}/.docker-node-modules/:$(CONTAINER_SOURCE_MOUNT)/node_modules" --env-file ${ENV_FILE} $(BUILD_CONTAINER_NAME) 
 	DOCKER_RUN_BUILD_INTERACTIVE =docker run --rm -it --volume "${PWD}/:$(CONTAINER_SOURCE_MOUNT)/" --volume /var/run/docker.sock:/var/run/docker.sock --volume "${PWD}/.docker-npm-cache/:/root/.npm" --volume "${PWD}/.docker-node-modules/:$(CONTAINER_SOURCE_MOUNT)/node_modules" --env-file ${ENV_FILE} $(BUILD_CONTAINER_NAME) 
 endif
+
+# SOURCE FILES
+DIST_SOURCES_DOCS := $(shell find docs/ -name '*.*')
+DIST_SOURCES_HTML := $(shell find html/ -name '*.*')
+DIST_SOURCES_CONTENT := $(shell find content/ -name '*.*')
+
+# ------ PUBLIC COMMANDS
 
 .PHONY: all
 all: format test build release
@@ -54,7 +61,29 @@ dev: ./out/.docker_hash
 release: ./out/.docker_hash
 	${DOCKER_RUN_BUILD} sh -c "make release-local"
 
-./out/.docker_hash: Dockerfile | setup-hooks out
+
+# ------ END PUBLIC COMMANDS
+
+
+# ------ LOCAL COMMANDS
+
+.PHONY: all-local
+all-local: format-local lint-local build-local test-local release-local
+
+.PHONY: format-local
+format-local: ./out/.format_make_marker | info-local
+
+.PHONY: format-fix-local
+format-fix-local: ./node_modules/.make_marker | info-local
+	npx prettier . --write
+
+.PHONY: build-local
+build-local: ./dist/.make_marker | info-local
+
+
+# ---- INTERNAL ASSETS
+
+./out/.docker_hash: .devcontainer/Dockerfile | setup-hooks out
 ifndef NON_CONTAINER_BUILD
 	sh -c "make env"
 	@if ! docker buildx ls | grep -q ${BUILD_CONTAINER_NAME}; then\
@@ -73,30 +102,20 @@ endif
 	echo "BLANK" > ./node_modules/.make_marker
 
 
-# LOCAL COMMANDS
-
-.PHONY: all-local
-all-local: format-local lint-local build-local test-local release-local
-
-.PHONY: format-local
-format-local: ./node_modules/.make_marker info-local
-	npx prettier . --check
-
-.PHONY: format-fix-local
-format-fix-local: ./node_modules/.make_marker info-local
-	npx prettier . --write
-
-.PHONY: build-local
-build-local: dist info-local
-
-.PHONY: dist
-dist: ./node_modules/.make_marker info-local
+# Build
+./dist/.make_marker: ./node_modules/.make_marker ${DIST_SOURCES_DOCS} ${DIST_SOURCES_HTML} ${DIST_SOURCES_CONTENT} | info-local
 	@echo "🛠 Building..."
 	rm -rf dist
 	npm run build
+	echo "BLANK" > ./dist/.make_marker
+
+./out/.format_make_marker: ./node_modules/.make_marker ${DIST_SOURCES_DOCS} ${DIST_SOURCES_HTML} ${DIST_SOURCES_CONTENT} | info-local
+	npx prettier . --check
+	echo "BLANK" > ./out/.format_make_marker
+
 
 .PHONY: test-local
-test-local: ./node_modules/.make_marker info-local
+test-local: ./node_modules/.make_marker ${DIST_SOURCES_DOCS} ${DIST_SOURCES_HTML} ${DIST_SOURCES_CONTENT}  | info-local
 
 .PHONY: dev-local
 dev-local: ./node_modules/.make_marker info-local
@@ -160,7 +179,7 @@ endif
 	git config --global user.email "${GIT_EMAIL}"
 	git config --global --add safe.directory ${CONTAINER_SOURCE_MOUNT}
 
-out/.release_marker: dist release.config.js package-lock.json README.md | out
+out/.release_marker: ./dist/.make_marker release.config.js package-lock.json README.md | out
 	@echo "💸 Releasing..."
 ifndef GITHUB_TOKEN
 	$(error GITHUB_TOKEN is not set)
