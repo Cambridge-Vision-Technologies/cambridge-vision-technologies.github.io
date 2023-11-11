@@ -222,3 +222,8 @@ ifndef CI
 endif
 	printf "NPM_TOKEN=${GITHUB_TOKEN}\nGITHUB_TOKEN=${GITHUB_TOKEN}\nGH_TOKEN=${GITHUB_TOKEN}\nGIT_NAME=${GIT_NAME}\nGIT_EMAIL=${GIT_EMAIL}\nGITHUB_REPOSITORY=${GITHUB_REPOSITORY}\nCI=${CI}" > $(ENV_FILE)
 endif
+
+
+serve:
+	python3 -m http.server 8080 -d ./dist
+	
