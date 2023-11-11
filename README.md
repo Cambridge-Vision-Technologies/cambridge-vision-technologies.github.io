@@ -10,7 +10,7 @@
 
 ## Prerequisites
 
-- You need to first create a `~/cvt-website.env` file in your home directory. This should contain all teh environment variables that are needed to build and deploy the system. A sample env file is included at [./sample.env](sample.env)
+- You need to first create a `~/cvt-website.env` file in your home directory. This should contain all the environment variables that are needed to build and deploy the system. A sample env file is included at [./sample.env](sample.env)
 
 You should be able to develop and run this project directly in GitHub Codespaces or.
 
