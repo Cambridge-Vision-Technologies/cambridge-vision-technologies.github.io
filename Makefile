@@ -98,7 +98,7 @@ endif
 
 ./node_modules/.make_marker: package-lock.json | out
 	@echo "💾 Installing npm dependencies"
-	npm ci --ignore-scripts
+	npm ci
 	echo "BLANK" > ./node_modules/.make_marker
 
 
@@ -133,6 +133,7 @@ clean:
 	rm -rf dist
 	rm -rf .docker-node-modules
 	rm -rf .docker-nom-cache
+	rm -rf .parcel-cache
 
 # Commit management
 

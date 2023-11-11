@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Inter");
 @import url("https://fonts.googleapis.com/css?family=Bakbak+One");
 @import url("./brand.css");
+@import url("./menu.css");
 
 h1 {
   font-size: 3vw;
@@ -88,6 +89,13 @@ body {
   height: 100%;
   object-fit: cover;
 }
+.content .item picture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .content .item .statement {
   font-size: 4vw;
@@ -95,16 +103,15 @@ body {
   margin: 20px;
 }
 
-/* .content .item .background {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
 .content .item-full img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.content .item-full picture {
+  width: 100%;
+  height: 100%;
 }
 
 .content .item-full video {
@@ -113,24 +120,16 @@ body {
   object-fit: cover;
 }
 
-/* .content .item {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
-/* #bgVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
 .bg-secondary-light {
   background-color: var(--secondary-light);
 }
 
 .bg-primary-light {
   background-color: var(--primary-light);
+}
+
+.bg-white {
+  background-color: white;
 }
 
 #Version {
