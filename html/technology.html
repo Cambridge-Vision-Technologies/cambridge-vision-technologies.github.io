@@ -2,47 +2,72 @@
 <html lang="en">
   {{{head}}}
   <body>
-    <div class="header">
-      <div class="menu">
-        <a href="index.html">
-          <img src="./img/icon+colour.svg" class="logo" />
-        </a>
-        <a href="problem.html">Problem</a>
-        <a href="technology.html" class="active">Technology</a>
-        <a href="about.html">About</a>
-      </div>
-    </div>
+    {{{header}}}
     <div class="content">
       <div class="item bg-primary-light">
-        <img src="./img/scan.jpeg" />
+        <span style="font-size: 3vw; text-align: center; font-style: italic">{{{retina}}}</span>
       </div>
-      <div class="item" style="background-color: #f8f8f8">
+      <div class="item bg-primary-light">
         <span> {{{solution}}} </span>
       </div>
       <div class="item-full bg-primary-light">
-        <img src="./img/digital-eye.jpeg" />
+        <picture>
+          <source srcset="./img/digital-eye.jpeg?as=avif&width=3200 2x" type="image/avif" />
+          <source srcset="./img/digital-eye.jpeg?as=avif&width=1600 1x" type="image/avif" />
+          <source srcset="./img/digital-eye.jpeg?as=webp&width=3200 2x" type="image/webp" />
+          <source srcset="./img/digital-eye.jpeg?as=webp&width=1600 1x" type="image/webp" />
+          <source srcset="./img/digital-eye.jpeg?width=1600 1x" type="image/jpeg" />
+          <img src="./img/digital-eye.jpeg?width=800" alt="digital eye" />
+        </picture>
       </div>
       <div class="item bg-secondary-light">
         <span> {{{hardware}}} </span>
       </div>
       <div class="item bg-secondary-light">
-        <img id="hardware-image" src="./img/KristinaDevice2.png" />
+        <picture>
+          <source srcset="./img/KristinaDevice2.png?as=avif&width=1600 2x" type="image/avif" />
+          <source srcset="./img/KristinaDevice2.png?as=avif&width=800 1x" type="image/avif" />
+          <source srcset="./img/KristinaDevice2.png?as=webp&width=1600 2x" type="image/webp" />
+          <source srcset="./img/KristinaDevice2.png?as=webp&width=800 1x" type="image/webp" />
+          <source srcset="./img/KristinaDevice2.png?width=800" type="image/png" />
+          <img id="hardware-image" src="./img/KristinaDevice2.png?width=400" alt="lady using retinal scanner" />
+        </picture>
       </div>
-
       <div class="item bg-primary-light">
-        <img style="object-fit: contain" src="./img/ai.png" />
+        <picture>
+          <source srcset="./img/ai.png?as=avif&width=1600 2x" type="image/avif" />
+          <source srcset="./img/ai.png?as=avif&width=800 1x" type="image/avif" />
+          <source srcset="./img/ai.png?as=webp&width=1600 2x" type="image/webp" />
+          <source srcset="./img/ai.png?as=webp&width=800 1x" type="image/webp" />
+          <source srcset="./img/ai.png?width=800" type="image/png" />
+          <img style="object-fit: contain" src="./img/ai.png?width=400" alt="artistic representation of AI" />
+        </picture>
       </div>
       <div class="item bg-primary-light">
         <span> {{{ai}}} </span>
       </div>
       <div class="item-full bg-primary-light">
-        <img src="./img/platform2.jpeg" />
+        <picture>
+          <source srcset="./img/platform.jpeg?as=avif&width=3200 2x" type="image/avif" />
+          <source srcset="./img/platform.jpeg?as=avif&width=1600 1x" type="image/avif" />
+          <source srcset="./img/platform.jpeg?as=webp&width=3200 2x" type="image/webp" />
+          <source srcset="./img/platform.jpeg?as=webp&width=1600 1x" type="image/webp" />
+          <source srcset="./img/platform.jpeg?width=1600 1x" type="image/jpeg" />
+          <img src="./img/platform.jpeg?width=800" alt="hands typing on laptop with lightning effect" />
+        </picture>
       </div>
       <div class="item bg-primary-light">
         <span> {{{platform}}} </span>
       </div>
       <div class="item bg-primary-light">
-        <img style="height: 60%" alt="secure" src="./img/secure.png" />
+        <picture>
+          <source srcset="./img/secure.png?as=avif&width=1600 2x" type="image/avif" />
+          <source srcset="./img/secure.png?as=avif&width=800 1x" type="image/avif" />
+          <source srcset="./img/secure.png?as=webp&width=1600 2x" type="image/webp" />
+          <source srcset="./img/secure.png?as=webp&width=800 1x" type="image/webp" />
+          <source srcset="./img/secure.png?width=800" type="image/png" />
+          <img style="height: 60%" alt="secure" src="./img/secure.png?width=400" alt="padlock" />
+        </picture>
       </div>
     </div>
     {{{footer}}}

@@ -34,9 +34,7 @@ const htmlContents = fileContents.map(({ fileName, ext, content }) => {
 const vars = squash(htmlContents);
 const htmlTemplatesArray = htmlFiles.map((filename) => {
   return {
-    [filename]: Handlebars.compile(
-      fs.readFileSync(`./html/${filename}`, "utf8"),
-    ),
+    [filename]: Handlebars.compile(fs.readFileSync(`./html/${filename}`, "utf8")),
   };
 });
 const htmlTemplates = squash(htmlTemplatesArray);
