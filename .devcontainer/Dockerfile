@@ -1,5 +1,5 @@
 FROM ghcr.io/cambridge-vision-technology/base:latest
-USER vscode
+# USER vscode
 # --platform=linux/amd64 
 # RUN sudo apt-get install chromium-browser -y
 # RUN sudo npm install -g puppeteer 
