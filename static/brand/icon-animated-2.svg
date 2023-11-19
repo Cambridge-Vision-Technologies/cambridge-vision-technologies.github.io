@@ -17,6 +17,8 @@
 <radialGradient id="paint2_radial_39_209" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(38.5018 0.499969) rotate(134.326) scale(60.1082)">
 <stop stop-color="#41DAFC"/>
 <stop offset="1" stop-color="#72A6D6" stop-opacity="0"/>
+<animate attributeName="cx" dur="1000ms" from="0" to="1" repeatCount="indefinite" />
+<animate attributeName="cx" dur="1000ms" from="1" to="0" repeatCount="indefinite" />
 </radialGradient>
 <clipPath id="clip0_39_209">
 <rect width="92" height="92" fill="white"/>
